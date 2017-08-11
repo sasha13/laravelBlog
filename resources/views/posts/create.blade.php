@@ -2,25 +2,18 @@
 
 @section('content')
 
-    <h2 class="blog-post-title">{{ $post->title }}</h2>
-    <p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }} by <a href="#">Mark</a></p>
-
-    <p>{{ $post->body }}</p>
-
-    @foreach($post->comments as $comment)
-        <li>
-            <strong>{{ $comment->created_at->diffForHumans() }}</strong>
-            {{ $comment->body }}
-        </li>
-    @endforeach
+    <h2>Create post</h2>
 
     <hr>
 
-    <h4>Comments</h4>
-
-    <form method="POST" action="/posts/{{ $post->id }}/comment">
+    <form method="POST" action="/posts">
 
         {{ csrf_field() }}
+
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title">
+        </div>
 
         <div class="form-group">
             <label for="body">Body</label>
@@ -45,5 +38,6 @@
         @endforeach
 
     @endif
+
 
 @endsection

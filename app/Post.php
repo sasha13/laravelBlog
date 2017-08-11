@@ -8,6 +8,11 @@ class Post extends Model
 {
 
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public static function published()
     {
         return self::where('published', 1)->get();
@@ -16,5 +21,10 @@ class Post extends Model
     public static function unpublished()
     {
         return self::where('published', 0)->get();
+    }
+
+    public function addComment($body)
+    {
+        $this->comments()->create(['body' => $body]);
     }
 }
